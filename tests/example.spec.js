@@ -1,7 +1,7 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-const URL = 'http://localhost:3000/';
+const URL = 'http://localhost:8080/';
 
 test('has counter', async ({ page }) => {
   await page.goto(URL);
