@@ -24,7 +24,10 @@ jobs:
     - name: Build project
       run: npm run build
 
-    - name: Run Playwright tests with node.js {{ matrix.node-version }}
+    - name: Launch project
+      run: npm start
+
+    - name: Run Playwright tests with node.js ${{ matrix.node-version }}
       run: npx playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
