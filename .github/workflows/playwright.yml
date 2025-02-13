@@ -25,7 +25,7 @@ jobs:
       run: npm run build
 
     - name: Launch project
-      run: npm start
+      run: npm start & npx wait-on http://localhost:8080
 
     - name: Run Playwright tests with node.js ${{ matrix.node-version }}
       run: npx playwright test
