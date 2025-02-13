@@ -26,7 +26,7 @@ jobs:
 
     - name: Launch project
 #   githab local ip  http://10.1.0.32:8080/
-      run: npm start & npx wait-on http://10.1.0.32:8080/
+      run: npm start & npx wait-on http://localhost:8080
 
     - name: Run Playwright tests with node.js ${{ matrix.node-version }}
       run: npx playwright test
