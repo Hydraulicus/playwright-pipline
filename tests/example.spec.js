@@ -3,17 +3,27 @@ import { test, expect } from '@playwright/test';
 
 const URL = 'http://localhost:8080/';
 
-test('has counter', async ({ page }) => {
-  await page.goto(URL);
+test.describe.configure({mode: 'parallel'});
 
+test.beforeEach(async ({ page }) => {
+  await page.goto(URL);
+})
+
+test('has counter', {
+  annotation: {
+    type: 'unit',
+  }
+}, async ({ page }) => {
   // Check if the counter display element is present
   const counterDisplay = await page.$('#counter-display');
   expect(counterDisplay).not.toBeNull();
 });
 
-test('check counting reaching end value', async ({ page }) => {
-  await page.goto(URL);
-
+test('check counting reaching end value', {
+  annotation: {
+    type: 'e2e',
+  }
+},async ({ page }) => {
   // Get the initial counter value
   const counterDisplay = await page.$('#counter-display');
   const counterValue = await counterDisplay?.innerText();
@@ -29,6 +39,13 @@ test('check counting reaching end value', async ({ page }) => {
   // check for message display
   const messageDisplay = await page.$('#message-display');
   expect(messageDisplay).not.toBeNull();
+});
 
-
+test('check appearance of success message', {
+  annotation: {
+    type: 'e2e',
+    description: 'e2e with snapshot'
+  }
+},async ({ page }) => {
+  await expect(page).toHaveScreenshot()
 });
